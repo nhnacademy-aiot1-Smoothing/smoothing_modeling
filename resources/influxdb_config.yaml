@@ -1,0 +1,4 @@
+smoothing_influxdb:
+  url: ""
+  token: ""
+  org: ""
