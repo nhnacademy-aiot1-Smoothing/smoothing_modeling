@@ -1,5 +1,5 @@
 ---
-name: feat-template.md
+name: feat-template
 about: Describe this issue template's purpose here.
 title: ''
 labels: enhancement
