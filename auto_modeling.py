@@ -111,9 +111,9 @@ flux_queries = {
 }
 
 format_dict = {
-    "point": "power_usage",
+    "measurement": "power_usage",
     "field": "socket_power",
-    "bucket": "power_ml_data",
+    "bucket": "ai_service_data",
     "org": "smoothing"
 }
 

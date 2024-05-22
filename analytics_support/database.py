@@ -53,7 +53,7 @@ class InfluxDBManager:
         write_api = self.client.write_api(write_options=SYNCHRONOUS)
         # 데이터 프레임의 각 행을 데이터 포인트로 변환
         points = [
-            Point(format_dict["point"])
+            Point(format_dict["measurement"])
             .field(format_dict["field"], row[format_dict["field"]])
             .time(row['time'], WritePrecision.NS)
             for index, row in dataframe.iterrows()
