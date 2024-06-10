@@ -29,13 +29,15 @@ def modeling(model_path, csv_path, target):
         model_exo = exp_exo.create_model(
             "arima",
             order=(0, 1, 2),
-            seasonal_order=(0, 1, 1, 24),
-            verbose=False
+            seasonal_order=(0, 1, 1, 24)
         )
 
         # Finalize Model : 전체 데이터를 활용한 재학습
         final_model = exp_exo.finalize_model(model_exo)
         logging.info("모델 구현 완료 - Saving...")
+
+        if not os.path.exists("resources/model/"):
+            os.makedirs("resources/model")
 
         exp_exo.save_model(final_model, model_path)
 

@@ -3,6 +3,10 @@ import logging
 import subprocess
 import importlib.metadata
 
+PACKAGE_LIST = ['influxdb_client', 'pycaret', 'pyyaml', 'prophet']
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
 
 def install_package(package):
     try:
@@ -20,3 +24,12 @@ def install_package(package):
         except Exception as e:
             logging.error(f"예기치 못한 오류가 발생했습니다: {str(e)}.")
 
+
+def main():
+    logging.info("필요 패키지를 확인합니다.")
+    for package in PACKAGE_LIST:
+        install_package(package)
+
+
+if __name__ == "__main__":
+    main()

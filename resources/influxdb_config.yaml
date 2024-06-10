@@ -1,4 +1,4 @@
 smoothing_influxdb:
-  url: ""
-  token: ""
-  org: ""
+  url: "http://133.186.144.22:8086"
+  token: "r3Ecro-rJQ82UpyNScnHXYDZ3KaE45AzweCXz6QIv2jeo7eOP4hL4-A9uKvkAVQDg_xavWorGUGZn7MI_sPCwg=="
+  org: "smoothing"

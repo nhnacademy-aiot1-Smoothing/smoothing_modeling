@@ -1,8 +1,9 @@
 import logging
-import pandas as pd
-import numpy as np
-from typing import List
 from pathlib import Path
+from typing import List
+
+import numpy as np
+import pandas as pd
 
 
 def resampling_data(df: pd.DataFrame, change_column_name: str, calculate: str = "not") -> pd.DataFrame:
@@ -13,11 +14,13 @@ def resampling_data(df: pd.DataFrame, change_column_name: str, calculate: str = 
     :param calculate: 사용할 집계 함수('sum', 'mean' 등) or 'not'일 경우 이름만 변경
     :return: 재집계 및/또는 이름이 변경된 데이터프레임
     """
+
     if not pd.api.types.is_datetime64_any_dtype(df.index):
         df["time"] = pd.to_datetime(df["time"])
         df.set_index("time", inplace=True)
 
     if calculate != "not":
+        df["value"] = df["value"] / 60
         result = df.resample("H").agg({"value": calculate}).rename(columns={"value": change_column_name})
     else:
         result = df.rename(columns={"value": change_column_name})

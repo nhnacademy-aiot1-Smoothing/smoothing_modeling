@@ -4,22 +4,21 @@ import logging
 import pandas as pd
 from pathlib import Path
 from datetime import datetime
-from analytics_support.logging import setup_logging
 from analytics_support.database import InfluxDBManager
 from analytics_support.config_loader import load_config
-from analytics_support.installing_package import install_package
 from analytics_support.data_management import training_data_patch
 from analytics_support.modeling import modeling, generate_predictions
 
 
 # 상수 정의
-PACKAGE_LIST = ['influxdb_client', 'pycaret', 'pyyaml', 'prophet']
 CONFIG_PATH = "resources/influxdb_config.yaml"
 CSV_PATH = "resources/training_data/sensor_data.csv"
-DEFAULT_START_DATE = "2024-04-17"
+DEFAULT_START_DATE = "2024-04-16"
 TARGET = "socket_power(Wh)"
 MODEL_PATH = "resources/model/final_model"
 EXOG_VARS = ['average_co2(ppm)', 'average_illumination(lux)']
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
 def check_to_start_date(file_path: str) -> datetime:
@@ -121,10 +120,6 @@ format_dict = {
 def main():
     start_time = datetime.now()
     try:
-        logging.info("필요 패키지를 확인합니다.")
-        for package in PACKAGE_LIST:
-            install_package(package)
-
         config = load_config(CONFIG_PATH)
 
         logging.info("조회 날짜 확인 (UTC): %s ~ %s", start_time_utc.date(), end_time_utc.date())
@@ -156,5 +151,4 @@ def main():
 
 
 if __name__ == "__main__":
-    setup_logging()
     main()
